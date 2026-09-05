@@ -1,0 +1,18 @@
+pkgbase = graalnode-oracle-bin
+	pkgdesc = GraalNode, a Node.js 24 implementation on top of GraalVM (Oracle GraalVM native standalone)
+	pkgver = 25.2.4
+	pkgrel = 1
+	url = https://www.graalvm.org/javascript/
+	arch = x86_64
+	arch = aarch64
+	license = custom:GraalVM Free Terms and Conditions
+	depends = gcc-libs
+	depends = zlib
+	conflicts = graalnode-bin
+	options = !strip
+	source_x86_64 = https://github.com/oracle/graaljs/releases/download/graal-25.2.4/graalnode24-25.2.4-linux-amd64.tar.gz
+	sha256sums_x86_64 = f2597f356eb50b0202996202279de8a40b5a52c0e838d7ad565aa97a71b5aa37
+	source_aarch64 = https://github.com/oracle/graaljs/releases/download/graal-25.2.4/graalnode24-25.2.4-linux-aarch64.tar.gz
+	sha256sums_aarch64 = eda811efafdcaf53f7e610bf35412406b11be45790e4386e0c5c0cae2a6a5b2f
+
+pkgname = graalnode-oracle-bin

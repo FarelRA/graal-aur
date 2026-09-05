@@ -1,0 +1,22 @@
+pkgbase = js-graaljs-oracle-bin
+	pkgdesc = GraalJS as a drop-in replacement for SpiderMonkey's js (Oracle GraalVM native standalone)
+	pkgver = 25.2.4
+	pkgrel = 1
+	url = https://www.graalvm.org/javascript/
+	arch = x86_64
+	arch = aarch64
+	license = custom:GraalVM Free Terms and Conditions
+	depends = gcc-libs
+	depends = zlib
+	provides = js
+	conflicts = js
+	conflicts = graaljs-bin
+	conflicts = graaljs-oracle-bin
+	conflicts = js-graaljs-bin
+	options = !strip
+	source_x86_64 = https://github.com/oracle/graaljs/releases/download/graal-25.2.4/graaljs-25.2.4-linux-amd64.tar.gz
+	sha256sums_x86_64 = 9cf9e644e25ffc6d712206308622b0debcb2aa51bcebe0023f05c6a66848af53
+	source_aarch64 = https://github.com/oracle/graaljs/releases/download/graal-25.2.4/graaljs-25.2.4-linux-aarch64.tar.gz
+	sha256sums_aarch64 = c3669f4ef4c8b80b9d544541831d7cac402f21f6fdc32a306ed6a56f708ab991
+
+pkgname = js-graaljs-oracle-bin

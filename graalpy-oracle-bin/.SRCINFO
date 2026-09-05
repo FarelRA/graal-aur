@@ -1,0 +1,18 @@
+pkgbase = graalpy-oracle-bin
+	pkgdesc = GraalPy, a Python 3.12 implementation on top of GraalVM (Oracle GraalVM native standalone)
+	pkgver = 25.2.4
+	pkgrel = 1
+	url = https://www.graalvm.org/python/
+	arch = x86_64
+	arch = aarch64
+	license = custom:GraalVM Free Terms and Conditions
+	depends = gcc-libs
+	depends = zlib
+	conflicts = graalpy-bin
+	options = !strip
+	source_x86_64 = https://github.com/oracle/graalpython/releases/download/graal-25.2.4/graalpy3.12-25.2.4-linux-amd64.tar.gz
+	sha256sums_x86_64 = b3d0766ae6d55daa15f0db1f6c884383d7eec506b186d0ba2f702523a78ff28d
+	source_aarch64 = https://github.com/oracle/graalpython/releases/download/graal-25.2.4/graalpy3.12-25.2.4-linux-aarch64.tar.gz
+	sha256sums_aarch64 = e57472272b1b659ae6ac972117723b0515a49cc9577688ed5563919793170d67
+
+pkgname = graalpy-oracle-bin

@@ -1,0 +1,38 @@
+# Maintainer: Your Name <you@example.com>
+
+pkgname=graalpy-bin
+pkgver=25.2.4
+pkgrel=1
+pkgdesc="GraalPy, a Python 3.12 implementation on top of GraalVM (GraalVM Community Edition native standalone)"
+arch=('x86_64'
+      'aarch64')
+url='https://www.graalvm.org/python/'
+license=('UPL')
+depends=(
+    'gcc-libs'
+    'zlib'
+)
+conflicts=('graalpy-oracle-bin')
+options=('!strip')
+source_x86_64=("https://github.com/oracle/graalpython/releases/download/graal-${pkgver}/graalpy3.12-community-${pkgver}-linux-amd64.tar.gz")
+source_aarch64=("https://github.com/oracle/graalpython/releases/download/graal-${pkgver}/graalpy3.12-community-${pkgver}-linux-aarch64.tar.gz")
+sha256sums_x86_64=('98af303a6b714bde39077354733254f78023ddef06d61e14cb66a3a01f10ae82')
+sha256sums_aarch64=('dda5e97c8b38158184dec189addaece57a37207a0dad38be162621d605f964f5')
+
+package() {
+    local _dir
+
+    _dir=$(find "$srcdir" -mindepth 1 -maxdepth 1 -type d -name 'graalpy*' -print -quit)
+
+    install -dm755 "$pkgdir/usr/lib/graalpy"
+    cp -a "$_dir"/bin "$_dir"/lib "$_dir"/libexec "$_dir"/include -t "$pkgdir/usr/lib/graalpy/"
+
+    install -Dm644 "$_dir/LICENSE.txt" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -Dm644 "$_dir/3rd_party_licenses.txt" "$pkgdir/usr/share/licenses/$pkgname/3rd_party_licenses.txt"
+    install -Dm644 "$_dir/README_GRAALPY.md" "$pkgdir/usr/share/doc/$pkgname/README_GRAALPY.md"
+
+    install -dm755 "$pkgdir/usr/bin"
+    ln -s ../lib/graalpy/bin/graalpy "$pkgdir/usr/bin/graalpy"
+    ln -s ../lib/graalpy/bin/graalpy-config "$pkgdir/usr/bin/graalpy-config"
+    ln -s ../lib/graalpy/libexec/graalpy-polyglot-get "$pkgdir/usr/bin/graalpy-polyglot-get"
+}

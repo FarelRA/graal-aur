@@ -1,0 +1,24 @@
+pkgbase = python-graalpy-bin
+	pkgdesc = Python 3.12 on GraalVM as a drop-in replacement for CPython (GraalVM Community Edition native standalone)
+	pkgver = 25.2.4
+	pkgrel = 1
+	url = https://www.graalvm.org/python/
+	arch = x86_64
+	arch = aarch64
+	license = UPL
+	depends = gcc-libs
+	depends = zlib
+	provides = python=3.12.8
+	provides = python3=3.12.8
+	conflicts = python
+	conflicts = python3
+	conflicts = graalpy-bin
+	conflicts = graalpy-oracle-bin
+	conflicts = python-graalpy-oracle-bin
+	options = !strip
+	source_x86_64 = https://github.com/oracle/graalpython/releases/download/graal-25.2.4/graalpy3.12-community-25.2.4-linux-amd64.tar.gz
+	sha256sums_x86_64 = 98af303a6b714bde39077354733254f78023ddef06d61e14cb66a3a01f10ae82
+	source_aarch64 = https://github.com/oracle/graalpython/releases/download/graal-25.2.4/graalpy3.12-community-25.2.4-linux-aarch64.tar.gz
+	sha256sums_aarch64 = dda5e97c8b38158184dec189addaece57a37207a0dad38be162621d605f964f5
+
+pkgname = python-graalpy-bin

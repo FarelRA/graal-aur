@@ -1,0 +1,38 @@
+# Maintainer: Your Name <you@example.com>
+
+pkgname=graalnode-bin
+pkgver=25.2.4
+pkgrel=1
+pkgdesc="GraalNode, a Node.js 24 implementation on top of GraalVM (GraalVM Community Edition native standalone)"
+arch=('x86_64'
+      'aarch64')
+url='https://www.graalvm.org/javascript/'
+license=('UPL')
+depends=(
+    'gcc-libs'
+    'zlib'
+)
+conflicts=('graalnode-oracle-bin')
+options=('!strip')
+source_x86_64=("https://github.com/oracle/graaljs/releases/download/graal-${pkgver}/graalnode24-community-${pkgver}-linux-amd64.tar.gz")
+source_aarch64=("https://github.com/oracle/graaljs/releases/download/graal-${pkgver}/graalnode24-community-${pkgver}-linux-aarch64.tar.gz")
+sha256sums_x86_64=('d60e39bbe748e16a004a8107a8d51bfd8646a0cbaffc0c6ca1498722037b528a')
+sha256sums_aarch64=('db49bc1cd88b821e5ede63c4d3ceda958ff982a73796586bcbdb957f0713b678')
+
+package() {
+    local _dir
+
+    _dir=$(find "$srcdir" -mindepth 1 -maxdepth 1 -type d -name 'graalnode*' -print -quit)
+
+    install -dm755 "$pkgdir/usr/lib/graalnode"
+    cp -a "$_dir"/bin "$_dir"/lib "$_dir"/include "$_dir"/npm -t "$pkgdir/usr/lib/graalnode/"
+
+    install -Dm644 "$_dir/LICENSE.txt" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -Dm644 "$_dir/3rd_party_licenses.txt" "$pkgdir/usr/share/licenses/$pkgname/3rd_party_licenses.txt"
+    install -Dm644 "$_dir/NODE_README.md" "$pkgdir/usr/share/doc/$pkgname/NODE_README.md"
+
+    install -dm755 "$pkgdir/usr/bin"
+    ln -s ../lib/graalnode/bin/node "$pkgdir/usr/bin/graalnode"
+    ln -s ../lib/graalnode/bin/npm "$pkgdir/usr/bin/graalnode-npm"
+    ln -s ../lib/graalnode/bin/npx "$pkgdir/usr/bin/graalnode-npx"
+}

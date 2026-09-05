@@ -1,0 +1,26 @@
+pkgbase = node-graalnode-bin
+	pkgdesc = Node.js 24 on GraalVM as a drop-in replacement for Node.js (GraalVM Community Edition native standalone)
+	pkgver = 25.2.4
+	pkgrel = 1
+	url = https://www.graalvm.org/javascript/
+	arch = x86_64
+	arch = aarch64
+	license = UPL
+	depends = gcc-libs
+	depends = zlib
+	provides = node=24.17.0
+	provides = nodejs=24.17.0
+	provides = npm=11.13.0
+	provides = npx=11.13.0
+	conflicts = nodejs
+	conflicts = npm
+	conflicts = graalnode-bin
+	conflicts = graalnode-oracle-bin
+	conflicts = node-graalnode-oracle-bin
+	options = !strip
+	source_x86_64 = https://github.com/oracle/graaljs/releases/download/graal-25.2.4/graalnode24-community-25.2.4-linux-amd64.tar.gz
+	sha256sums_x86_64 = d60e39bbe748e16a004a8107a8d51bfd8646a0cbaffc0c6ca1498722037b528a
+	source_aarch64 = https://github.com/oracle/graaljs/releases/download/graal-25.2.4/graalnode24-community-25.2.4-linux-aarch64.tar.gz
+	sha256sums_aarch64 = db49bc1cd88b821e5ede63c4d3ceda958ff982a73796586bcbdb957f0713b678
+
+pkgname = node-graalnode-bin

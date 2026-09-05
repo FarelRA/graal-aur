@@ -1,0 +1,42 @@
+# Maintainer: Your Name <you@example.com>
+
+pkgname=js-graaljs-oracle-bin
+pkgver=25.2.4
+pkgrel=1
+pkgdesc="GraalJS as a drop-in replacement for SpiderMonkey's js (Oracle GraalVM native standalone)"
+arch=('x86_64'
+      'aarch64')
+url='https://www.graalvm.org/javascript/'
+license=('custom:GraalVM Free Terms and Conditions')
+depends=(
+    'gcc-libs'
+    'zlib'
+)
+provides=('js')
+conflicts=(
+    'js'
+    'graaljs-bin'
+    'graaljs-oracle-bin'
+    'js-graaljs-bin'
+)
+options=('!strip')
+source_x86_64=("https://github.com/oracle/graaljs/releases/download/graal-${pkgver}/graaljs-${pkgver}-linux-amd64.tar.gz")
+source_aarch64=("https://github.com/oracle/graaljs/releases/download/graal-${pkgver}/graaljs-${pkgver}-linux-aarch64.tar.gz")
+sha256sums_x86_64=('9cf9e644e25ffc6d712206308622b0debcb2aa51bcebe0023f05c6a66848af53')
+sha256sums_aarch64=('c3669f4ef4c8b80b9d544541831d7cac402f21f6fdc32a306ed6a56f708ab991')
+
+package() {
+    local _dir
+
+    _dir=$(find "$srcdir" -mindepth 1 -maxdepth 1 -type d -name 'graaljs*' -print -quit)
+
+    install -dm755 "$pkgdir/usr/lib/graaljs"
+    cp -a "$_dir"/bin "$_dir"/lib -t "$pkgdir/usr/lib/graaljs/"
+
+    install -Dm644 "$_dir/LICENSE.txt" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -Dm644 "$_dir/license-information-user-manual.zip" "$pkgdir/usr/share/licenses/$pkgname/license-information-user-manual.zip"
+    install -Dm644 "$_dir/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
+
+    install -dm755 "$pkgdir/usr/bin"
+    ln -s ../lib/graaljs/bin/js "$pkgdir/usr/bin/js"
+}
